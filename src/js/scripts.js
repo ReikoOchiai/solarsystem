@@ -89,37 +89,48 @@ function createPlanet(size, position, texture, ring) {
 	return { mesh, obj }
 }
 
-const mercury = createPlanet(5, 28, mercuryTexture)
+const mercury = createPlanet(5, 22, mercuryTexture)
+const venus = createPlanet(8, 37, venusTexture)
+const earth = createPlanet(8, 55, earthTexture)
+const mars = createPlanet(4.5, 70, marsTexture)
 
-const saturnGeo = new THREE.SphereGeometry(10, 25, 25)
-const saturnMat = new THREE.MeshBasicMaterial({
-	map: textureLoader.load(saturnTexture),
-})
-const saturn = new THREE.Mesh(saturnGeo, saturnMat)
-const saturnObject = new THREE.Object3D()
+// const saturnGeo = new THREE.SphereGeometry(10, 25, 25)
+// const saturnMat = new THREE.MeshBasicMaterial({
+// 	map: textureLoader.load(saturnTexture),
+// })
+// const saturn = new THREE.Mesh(saturnGeo, saturnMat)
+// const saturnObject = new THREE.Object3D()
 
-saturnObject.add(saturn)
-scene.add(saturnObject)
-saturnObject.position.x = 65
+// saturnObject.add(saturn)
+// scene.add(saturnObject)
+// saturnObject.position.x = 65
 
-// saturn ring
-const saturnRingGeo = new THREE.RingGeometry(10, 20, 30)
-const saturnRingMat = new THREE.MeshBasicMaterial({
-	map: textureLoader.load(saturnRingTexture),
-	side: THREE.DoubleSide,
-})
-const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
+// // saturn ring
+// const saturnRingGeo = new THREE.RingGeometry(10, 20, 30)
+// const saturnRingMat = new THREE.MeshBasicMaterial({
+// 	map: textureLoader.load(saturnRingTexture),
+// 	side: THREE.DoubleSide,
+// })
+// const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
 
-saturnObject.add(saturnRing)
-saturnRing.rotation.x = 0.5 * Math.PI
+// saturnObject.add(saturnRing)
+// saturnRing.rotation.x = 0.5 * Math.PI
 
 const pointLight = new THREE.PointLight(0xffffff, 2, 300)
 scene.add(pointLight)
 
 function animate() {
-	sun.rotateY(0.004) // Rotate sun mesh
+	// Self rotation
+	sun.rotateY(0.004)
 	mercury.mesh.rotateY(0.004)
+	venus.mesh.rotateY(0.01)
+	earth.mesh.rotateY(0.01)
+	mars.mesh.rotateY(0.01)
+
+
+	// rotation around the earth
 	mercury.obj.rotateY(0.04)
+
 	renderer.render(scene, camera)
 }
 
