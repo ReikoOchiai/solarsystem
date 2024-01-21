@@ -35,10 +35,28 @@ const orbit = new OrbitControls(camera, renderer.domElement)
 camera.position.set(-90, 140, 140)
 orbit.update()
 
+const loadingManager = new THREE.LoadingManager()
+const progress = document.querySelector('.progress-percentage')
+const progressContainer = document.querySelector('.progress-container')
+
+loadingManager.onProgress = function (url, loaded, total) {
+	let percentage = (loaded / total) * 100
+	progress.textContent = `${percentage?.toFixed(2)}%`
+	if (percentage === 100) {
+		progressContainer.classList.add('fade-out')
+	}
+}
+
+loadingManager.onLoad = function () {
+	progressContainer.addEventListener('transitionend', function () {
+		progressContainer.remove()
+	})
+}
+
 const ambientLight = new THREE.AmbientLight(0x333333)
 scene.add(ambientLight)
 
-const cubeTextureLoader = new THREE.CubeTextureLoader()
+const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 scene.background = cubeTextureLoader.load([
 	starsTexture,
 	starsTexture,
