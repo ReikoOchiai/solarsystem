@@ -93,28 +93,29 @@ const mercury = createPlanet(5, 22, mercuryTexture)
 const venus = createPlanet(8, 37, venusTexture)
 const earth = createPlanet(8, 55, earthTexture)
 const mars = createPlanet(4.5, 70, marsTexture)
+const jupiter = createPlanet(10.5, 100, jupiterTexture, {
+	innerRadius: 18,
+	outerRadius: 20,
+	texture: saturnRingTexture,
+})
+const saturn = createPlanet(10, 145, saturnTexture, {
+	innerRadius: 10,
+	outerRadius: 20,
+	texture: saturnRingTexture,
+})
 
-// const saturnGeo = new THREE.SphereGeometry(10, 25, 25)
-// const saturnMat = new THREE.MeshBasicMaterial({
-// 	map: textureLoader.load(saturnTexture),
-// })
-// const saturn = new THREE.Mesh(saturnGeo, saturnMat)
-// const saturnObject = new THREE.Object3D()
+const uranus = createPlanet(5, 175, uranusTexture, {
+	innerRadius: 7,
+	outerRadius: 9,
+	texture: saturnRingTexture,
+})
 
-// saturnObject.add(saturn)
-// scene.add(saturnObject)
-// saturnObject.position.x = 65
+const neptune = createPlanet(5, 195, neptuneTexture, {
+	innerRadius: 7,
+	outerRadius: 10,
+	texture: saturnRingTexture,
+})
 
-// // saturn ring
-// const saturnRingGeo = new THREE.RingGeometry(10, 20, 30)
-// const saturnRingMat = new THREE.MeshBasicMaterial({
-// 	map: textureLoader.load(saturnRingTexture),
-// 	side: THREE.DoubleSide,
-// })
-// const saturnRing = new THREE.Mesh(saturnRingGeo, saturnRingMat)
-
-// saturnObject.add(saturnRing)
-// saturnRing.rotation.x = 0.5 * Math.PI
 
 const pointLight = new THREE.PointLight(0xffffff, 2, 300)
 scene.add(pointLight)
@@ -126,7 +127,10 @@ function animate() {
 	venus.mesh.rotateY(0.01)
 	earth.mesh.rotateY(0.01)
 	mars.mesh.rotateY(0.01)
-
+	jupiter.mesh.rotateY(0.01)
+	saturn.mesh.rotateY(0.01)
+	uranus.mesh.rotateY(0.01)
+	neptune.mesh.rotateY(0.01)
 
 	// rotation around the earth
 	mercury.obj.rotateY(0.04)
