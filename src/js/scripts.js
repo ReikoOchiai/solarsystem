@@ -35,8 +35,8 @@ const orbit = new OrbitControls(camera, renderer.domElement)
 camera.position.set(-90, 140, 140)
 orbit.update()
 
-// const ambientLight = new THREE.AmbientLight(0x333333)
-// scene.add(ambientLight)
+const ambientLight = new THREE.AmbientLight(0x333333)
+scene.add(ambientLight)
 
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 scene.background = cubeTextureLoader.load([
@@ -59,7 +59,7 @@ scene.add(sun)
 
 function createPlanet(size, position, texture, ring) {
 	const geo = new THREE.SphereGeometry(size, 30, 30)
-	const material = new THREE.MeshBasicMaterial({
+	const material = new THREE.MeshStandardMaterial({
 		map: textureLoader.load(texture),
 	})
 
@@ -67,8 +67,6 @@ function createPlanet(size, position, texture, ring) {
 	const obj = new THREE.Object3D()
 
 	obj.add(mesh)
-	scene.add(obj)
-	obj.position.x = position
 
 	if (ring) {
 		const ringGeo = new THREE.RingGeometry(
@@ -83,8 +81,11 @@ function createPlanet(size, position, texture, ring) {
 		const ringMesh = new THREE.Mesh(ringGeo, ringMat)
 
 		obj.add(ringMesh)
+		ringMesh.position.x = position
 		ringMesh.rotation.x = 0.5 * Math.PI
 	}
+	scene.add(obj)
+	mesh.position.x = position
 
 	return { mesh, obj }
 }
@@ -107,7 +108,7 @@ const saturn = createPlanet(10, 145, saturnTexture, {
 const uranus = createPlanet(5, 175, uranusTexture, {
 	innerRadius: 7,
 	outerRadius: 9,
-	texture: saturnRingTexture,
+	texture: uranusRingTexture,
 })
 
 const neptune = createPlanet(5, 195, neptuneTexture, {
@@ -115,7 +116,7 @@ const neptune = createPlanet(5, 195, neptuneTexture, {
 	outerRadius: 10,
 	texture: saturnRingTexture,
 })
-
+const pluto = createPlanet(2.5, 215, plutoTexture)
 
 const pointLight = new THREE.PointLight(0xffffff, 2, 300)
 scene.add(pointLight)
@@ -124,16 +125,25 @@ function animate() {
 	// Self rotation
 	sun.rotateY(0.004)
 	mercury.mesh.rotateY(0.004)
-	venus.mesh.rotateY(0.01)
-	earth.mesh.rotateY(0.01)
-	mars.mesh.rotateY(0.01)
-	jupiter.mesh.rotateY(0.01)
-	saturn.mesh.rotateY(0.01)
-	uranus.mesh.rotateY(0.01)
-	neptune.mesh.rotateY(0.01)
+	venus.mesh.rotateY(0.002)
+	earth.mesh.rotateY(0.02)
+	mars.mesh.rotateY(0.018)
+	jupiter.mesh.rotateY(0.04)
+	saturn.mesh.rotateY(0.038)
+	uranus.mesh.rotateY(0.03)
+	neptune.mesh.rotateY(0.032)
+	pluto.mesh.rotateY(0.008)
 
-	// rotation around the earth
+	// Rotation around the earth
 	mercury.obj.rotateY(0.04)
+	venus.obj.rotateY(0.015)
+	earth.obj.rotateY(0.01)
+	mars.obj.rotateY(0.008)
+	jupiter.obj.rotateY(0.002)
+	saturn.obj.rotateY(0.0009)
+	uranus.obj.rotateY(0.0004)
+	neptune.obj.rotateY(0.0001)
+	pluto.obj.rotateY(0.0007)
 
 	renderer.render(scene, camera)
 }
