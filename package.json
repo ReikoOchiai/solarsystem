@@ -2,10 +2,10 @@
 	"name": "solarsystem",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"source": "src/index.html",
 	"scripts": {
 		"dev": "npx parcel src/index.html",
-		"build": "npx parcel build src/index.html",
+		"build": "parcel build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
