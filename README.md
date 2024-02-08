@@ -1,6 +1,6 @@
 # 🎋 Intro
 
-Create solar system with Three.js and using parcel as web application bundler
+Create solar system with JavaScript & Three.js and using parcel as web application bundler
 
 ## 📦 Tech Stack
 
